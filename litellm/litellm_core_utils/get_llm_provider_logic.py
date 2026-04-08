@@ -82,10 +82,7 @@ def handle_anthropic_text_model_custom_llm_provider(
     """
 
     if custom_llm_provider:
-        if (
-            custom_llm_provider == "anthropic"
-            and model in _ANTHROPIC_TEXT_MODELS
-        ):
+        if custom_llm_provider == "anthropic" and model in _ANTHROPIC_TEXT_MODELS:
             return model, "anthropic_text"
 
     if model and "/" in model:
