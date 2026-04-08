@@ -447,32 +447,56 @@ class XAIVideoConfig(BaseVideoConfig):
 
     # -- Unsupported operations -----------------------------------------------
 
-    def transform_video_remix_request(self, *args: Any, **kwargs: Any) -> Tuple[str, Dict]:
+    def transform_video_remix_request(
+        self, *args: Any, **kwargs: Any
+    ) -> Tuple[str, Dict]:
         raise NotImplementedError("Video remix is not supported by xAI API")
 
     def transform_video_remix_response(self, *args: Any, **kwargs: Any) -> VideoObject:
         raise NotImplementedError("Video remix is not supported by xAI API")
 
-    def transform_video_list_request(self, *args: Any, **kwargs: Any) -> Tuple[str, Dict]:
+    def transform_video_list_request(
+        self, *args: Any, **kwargs: Any
+    ) -> Tuple[str, Dict]:
         raise NotImplementedError("Video listing is not supported by xAI API")
 
-    def transform_video_list_response(self, *args: Any, **kwargs: Any) -> Dict[str, str]:
+    def transform_video_list_response(
+        self, *args: Any, **kwargs: Any
+    ) -> Dict[str, str]:
         raise NotImplementedError("Video listing is not supported by xAI API")
 
-    def transform_video_delete_request(self, *args: Any, **kwargs: Any) -> Tuple[str, Dict]:
+    def transform_video_delete_request(
+        self, *args: Any, **kwargs: Any
+    ) -> Tuple[str, Dict]:
         raise NotImplementedError("Video deletion is not supported by xAI API")
 
     def transform_video_delete_response(self, *args: Any, **kwargs: Any) -> VideoObject:
         raise NotImplementedError("Video deletion is not supported by xAI API")
 
-    def transform_video_create_character_request(self, *args: Any, **kwargs: Any) -> Tuple[str, Dict]:
-        raise NotImplementedError("Video character creation is not supported by xAI API")
+    def transform_video_create_character_request(
+        self, *args: Any, **kwargs: Any
+    ) -> Tuple[str, Dict]:
+        raise NotImplementedError(
+            "Video character creation is not supported by xAI API"
+        )
 
-    def transform_video_create_character_response(self, *args: Any, **kwargs: Any) -> VideoObject:
-        raise NotImplementedError("Video character creation is not supported by xAI API")
+    def transform_video_create_character_response(
+        self, *args: Any, **kwargs: Any
+    ) -> VideoObject:
+        raise NotImplementedError(
+            "Video character creation is not supported by xAI API"
+        )
 
-    def transform_video_get_character_request(self, *args: Any, **kwargs: Any) -> Tuple[str, Dict]:
-        raise NotImplementedError("Video character retrieval is not supported by xAI API")
+    def transform_video_get_character_request(
+        self, *args: Any, **kwargs: Any
+    ) -> Tuple[str, Dict]:
+        raise NotImplementedError(
+            "Video character retrieval is not supported by xAI API"
+        )
 
-    def transform_video_get_character_response(self, *args: Any, **kwargs: Any) -> VideoObject:
-        raise NotImplementedError("Video character retrieval is not supported by xAI API")
+    def transform_video_get_character_response(
+        self, *args: Any, **kwargs: Any
+    ) -> VideoObject:
+        raise NotImplementedError(
+            "Video character retrieval is not supported by xAI API"
+        )
