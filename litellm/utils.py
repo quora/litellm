@@ -8951,6 +8951,10 @@ class ProviderConfigManager:
             from litellm.llms.runwayml.videos.transformation import RunwayMLVideoConfig
 
             return RunwayMLVideoConfig()
+        elif LlmProviders.XAI == provider:
+            from litellm.llms.xai.videos.transformation import XAIVideoConfig
+
+            return XAIVideoConfig()
         return None
 
     @staticmethod
