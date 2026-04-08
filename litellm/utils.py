@@ -8905,6 +8905,10 @@ class ProviderConfigManager:
             from litellm.llms.xai.videos.transformation import XAIVideoConfig
 
             return XAIVideoConfig()
+        elif LlmProviders.FAL_AI == provider:
+            from litellm.llms.fal_ai.videos.transformation import FalAIVideoConfig
+
+            return FalAIVideoConfig()
         return None
 
     @staticmethod
