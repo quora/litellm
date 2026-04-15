@@ -240,7 +240,7 @@ class AnthropicModelInfo(BaseLLMModelInfo):
 
     @staticmethod
     def _is_claude_4_6_model(model: str) -> bool:
-        """Check if the model is a Claude 4.6 model (Opus 4.6 or Sonnet 4.6)."""
+        """Check if the model is a Claude 4.6+ model using adaptive thinking."""
         model_lower = model.lower()
         return any(
             v in model_lower
@@ -253,6 +253,7 @@ class AnthropicModelInfo(BaseLLMModelInfo):
                 "sonnet_4_6",
                 "sonnet-4.6",
                 "sonnet_4.6",
+                "claude-nougat-eap",
             )
         )
 
