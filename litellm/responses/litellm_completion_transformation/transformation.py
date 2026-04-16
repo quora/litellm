@@ -976,6 +976,18 @@ class LiteLLMCompletionResponsesConfig:
                 function_call=input_item
             )
         else:
+            item_type = input_item.get("type")
+            # Handle bare content items (input_text, input_image, input_file)
+            # that appear at the top level without a message wrapper.
+            if item_type in ("input_text", "input_image", "input_file"):
+                return [
+                    GenericChatCompletionMessage(
+                        role="user",
+                        content=LiteLLMCompletionResponsesConfig._transform_responses_api_content_to_chat_completion_content(
+                            [input_item]
+                        ),
+                    )
+                ]
             content = input_item.get("content")
             # Handle None content: Responses API allows None content, but GenericChatCompletionMessage requires content
             # Since guardrails skip None content anyway, we return empty list to exclude it from structured messages
