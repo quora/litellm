@@ -246,6 +246,14 @@ class AnthropicConfig(AnthropicModelInfo, BaseConfig):
             params.append("thinking")
             params.append("reasoning_effort")
 
+        # Claude 4.6+ adaptive thinking models accept output_config for effort
+        # and task_budget. Expose it so chat_completions callers can pass it
+        # directly (otherwise only reasoning_effort→output_config mapping works).
+        if AnthropicConfig._is_claude_4_6_model(
+            model
+        ) or AnthropicConfig._is_claude_4_7_model(model):
+            params.append("output_config")
+
         return params
 
     @staticmethod
@@ -1087,6 +1095,8 @@ class AnthropicConfig(AnthropicModelInfo, BaseConfig):
                 optional_params["metadata"] = {"user_id": value}
             elif param == "thinking":
                 optional_params["thinking"] = value
+            elif param == "output_config" and isinstance(value, dict):
+                optional_params["output_config"] = value
             elif param == "reasoning_effort" and isinstance(value, str):
                 optional_params["thinking"] = AnthropicConfig._map_reasoning_effort(
                     reasoning_effort=value, model=model
