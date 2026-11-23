@@ -104,7 +104,7 @@ class CustomStreamWrapper:
         custom_llm_provider: Optional[str] = None,
         stream_options=None,
         make_call: Optional[Callable] = None,
-        _response_headers: Optional[dict] = None,
+        _response_headers: Optional[Union[dict, httpx.Headers]] = None,
     ):
         self.model = model
         self.make_call = make_call
