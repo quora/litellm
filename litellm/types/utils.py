@@ -13,6 +13,7 @@ from typing import (
     get_args,
 )
 
+import httpx
 from openai._models import BaseModel as OpenAIObject
 from openai.types.audio.transcription_create_params import (
     FileTypes as FileTypes,  # type: ignore
@@ -49,7 +50,10 @@ from litellm.types.llms.base import (
 )
 from litellm.types.mcp import MCPServerCostInfo
 
-from ..litellm_core_utils.core_helpers import map_finish_reason
+from ..litellm_core_utils.core_helpers import (
+    map_finish_reason,
+    process_response_headers,
+)
 from .agents import LiteLLMSendMessageResponse
 from .guardrails import GuardrailEventHooks
 from .llms.anthropic_messages.anthropic_response import AnthropicMessagesResponse
@@ -1783,6 +1787,10 @@ class ModelResponseBase(OpenAIObject):
     _hidden_params: dict = {}
 
     _response_headers: Optional[dict] = None
+
+    def set_provider_response_headers(self, headers: httpx.Headers) -> None:
+        """Surface a provider's raw response headers to the caller as `llm_provider-*` headers."""
+        self._hidden_params["additional_headers"] = process_response_headers(headers)
 
     def model_dump(self, **kwargs):
         """Default to exclude_unset to avoid Pydantic serializer warnings for OpenAIObject-derived types."""

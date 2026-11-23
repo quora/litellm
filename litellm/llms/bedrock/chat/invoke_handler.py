@@ -194,7 +194,12 @@ async def make_call(
     json_mode: Optional[bool] = False,
     bedrock_invoke_provider: Optional[litellm.BEDROCK_INVOKE_PROVIDERS_LITERAL] = None,
     stream_chunk_size: int = 1024,
+    return_response_headers: bool = False,
 ):
+    """
+    Return the completion stream, or (stream, response headers) when
+    return_response_headers is set.
+    """
     try:
         if client is None:
             client = get_async_httpx_client(
@@ -266,6 +271,8 @@ async def make_call(
             additional_args={"complete_input_dict": data},
         )
 
+        if return_response_headers:
+            return completion_stream, response.headers
         return completion_stream
     except httpx.HTTPStatusError as err:
         error_code = err.response.status_code
